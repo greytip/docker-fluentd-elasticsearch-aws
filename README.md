@@ -1,9 +1,11 @@
 # docker-fluentd-elasticsearch-aws
 This container is based on [gcr.io/google_containers/fluentd-elasticsearch](https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/fluentd-es-image/Dockerfile) which includes additional functionality:
 
-* Plugins
-** JSON-in-JSON parsing via the [fluent-plugin-json-in-json](https://github.com/gmr/fluent-plugin-json-in-json) plugin.
-** add aws es service  [fluent-plugin-aws-elasticsearch-service](https://github.com/atomita/fluent-plugin-aws-elasticsearch-service) plugin.
+* Plugin JSON-in-JSON 
+JSON-in-JSON parsing via the [fluent-plugin-json-in-json](https://github.com/gmr/fluent-plugin-json-in-json) plugin.
+
+* Plugin AWS elasticsearch service 
+add aws es service via the [fluent-plugin-aws-elasticsearch-service](https://github.com/atomita/fluent-plugin-aws-elasticsearch-service) plugin.
 
 ### Intallation requirements
 
