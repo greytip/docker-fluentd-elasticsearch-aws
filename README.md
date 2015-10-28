@@ -12,7 +12,7 @@ add aws es service via the [fluent-plugin-aws-elasticsearch-service](https://git
 On container you need specify es endpoint in config file under /etc/fluentd/conf.d/*.conf and provide
 
 ```
-<match "**">
+<match "kubernetes.**">
   type "aws-elasticsearch-service"
   logstash_format true
   include_tag_key true
