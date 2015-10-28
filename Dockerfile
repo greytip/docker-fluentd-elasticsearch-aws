@@ -4,7 +4,7 @@ FROM gcr.io/google_containers/fluentd-elasticsearch:1.6
 RUN /usr/sbin/td-agent-gem install fluent-plugin-json-in-json
 
 # Install the aws-elasticsearch-service plugin (https://github.com/atomita/fluent-plugin-aws-elasticsearch-service).
-RUN /usr/sbin/td-agent-gem install fluent-plugin-aws-elasticsearch-service
+RUN /usr/sbin/td-agent-gem install fluent-plugin-aws-elasticsearch-service -v 0.1.3
 
 # Copy the Elasticsearch logstash template.
 COPY elasticsearch-template.json /etc/td-agent/elasticsearch-template.json
