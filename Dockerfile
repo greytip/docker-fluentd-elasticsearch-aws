@@ -12,5 +12,9 @@ COPY elasticsearch-template.json /etc/td-agent/elasticsearch-template.json
 # Copy the Fluentd configuration file.
 COPY td-agent.conf /etc/td-agent/td-agent.conf
 
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
 # Create Logstash index template & run the Fluentd service.
-CMD /usr/sbin/td-agent "$FLUENTD_ARGS" > /var/log/td-agent/td-agent.log
+CMD ["/start.sh"]
+
