@@ -7,31 +7,32 @@ JSON-in-JSON parsing via the [fluent-plugin-json-in-json](https://github.com/gmr
 * Plugin AWS elasticsearch service 
 add aws es service via the [fluent-plugin-aws-elasticsearch-service](https://github.com/atomita/fluent-plugin-aws-elasticsearch-service) plugin.
 
-### Intallation requirements
+* Plugin Docker metadata 
+add docker metadata via the [fluent-plugin-docker_metadata_filter](https://github.com/fabric8io/fluent-plugin-docker_metadata_filter) plugin.
 
-On container you need specify es endpoint in config file under /etc/fluentd/conf.d/*.conf and provide
+* Plugin AWS EC2 metadata 
+add AWS EC2 metadata via the [fluent-plugin-ec2-metadata](https://github.com/takus/fluent-plugin-ec2-metadata) plugin.
+
+### Installation requirements
+
+You need to pass ElasticSearch endpoint, region, and credentials as environment variables:
+
 
 ```
-<match "kubernetes.**">
-  type "aws-elasticsearch-service"
-  logstash_format true
-  include_tag_key true
-  tag_key "@log_name"
-  log_level info
+docker run -d --restart=always \
+   -e ES_ENDPOINT="https://search-xxx-xxx.ap-southeast-1.es.amazonaws.com" \
+   -e ES_REGION="ap-southeast-1" \
+   -e AWS_ACCESS_KEY_ID="AKIAXXX"  \
+   -e AWS_SECRET_ACCESS_KEY="xxx#$XX12" \
+   -v /var/run/docker.sock:/var/run/docker.sock \
+   -v /var/lib/docker/containers:/var/lib/docker/containers \
+   --net=host \
+   --name fluent-aws-es \
+    greytip/fluent-aws-es:latest
+```
 
-  flush_interval 5s
-  # Set the chunk limit the same as for fluentd-gcp.
-  buffer_chunk_limit 512K
-  # Cap buffer memory usage to 512KB/chunk * 128 chunks = 65 MB
-  buffer_queue_limit 128
-  flush_interval 5s
-  # Never wait longer than 5 minutes between retries.
-  max_retry_wait 300
-  <endpoint>
-    url --> put in endpoint url that points to service.
-    region --> put in "eu-central-1"
-    access_key_id --> put in your iam-user access_key_id
-    secret_access_key --> put in your iam-user secret_access_key
-  </endpoint>
-</match>
+While the `td-agent.conf` does not need any changes, you can always override it by passing your own config file as a volume.
+
+```
+   -v /home/xxx/my-td-agent.conf":/etc/td-agent/td-agent.conf"
 ```
