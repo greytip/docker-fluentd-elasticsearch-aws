@@ -7,7 +7,7 @@ term_handler() {
 
 trap 'kill ${!}; term_handler' SIGTERM
 
-sed -ie "s/ES_AWS_ACESS_KEY_ID/${ES_AWS_ACCESS_KEY_ID}/g" /etc/td-agent/td-agent.conf
+sed -ie "s/ES_AWS_ACCESS_KEY_ID/${ES_AWS_ACCESS_KEY_ID}/g" /etc/td-agent/td-agent.conf
 sed -ie "s/ES_AWS_SECRET_ACCESS_KEY/${ES_AWS_SECRET_ACCESS_KEY}/g" /etc/td-agent/td-agent.conf
 
 set -x
