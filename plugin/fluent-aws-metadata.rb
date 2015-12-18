@@ -37,7 +37,7 @@ module Fluent
       new_es = MultiEventStream.new    
       tag_parts = tag.split('.')
       es.each { |time, record|
-        new_tag, new_record = modify(@output_tag, record, tag, tag_parts)
+        new_tag, new_record = modify(record, tag, tag_parts)
         new_es.add(time, new_record)
       }
 	  return new_es
